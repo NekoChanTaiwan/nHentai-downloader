@@ -10,8 +10,6 @@ session.mount('https://', requests.adapters.HTTPAdapter(max_retries = 3))
 kernel32 = ctypes.windll.kernel32
 
 for i in itertools.count(1) :
-    print(i)
-
     kernel32.SetConsoleMode(kernel32.GetStdHandle(-10), (0x4|0x80|0x20|0x2|0x10|0x1|0x40|0x100))
 
     bookId = input(f'請輸入ＩＤ：')
