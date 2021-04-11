@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 os.system('title nHentai Downloader Ver 0.1 By NekoChan')
 
 session = FuturesSession()
+session.mount('https://', requests.adapters.HTTPAdapter(max_retries = 3))
 kernel32 = ctypes.windll.kernel32
 
 while True :
@@ -38,7 +39,7 @@ while True :
                 futures = []
 
                 for index in range(pages) :
-                    future = session.get(f'https://i.nhentai.net/galleries/{galleriesId}/{index + 1}.{imgType}')
+                    future = session.get(f'https://i.nhentai.net/galleries/{galleriesId}/{index + 1}.{imgType}', timeout = (5, 10))
                     future.index = index
                     future.time = time.time()
                     futures.append(future)
