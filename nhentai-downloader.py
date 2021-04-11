@@ -1,5 +1,5 @@
-import os, shutil, requests, time, ctypes
-from concurrent.futures import as_completed
+import os, shutil, itertools, time, concurrent.futures, ctypes
+import requests
 from requests_futures.sessions import FuturesSession
 from bs4 import BeautifulSoup
 
@@ -9,7 +9,9 @@ session = FuturesSession()
 session.mount('https://', requests.adapters.HTTPAdapter(max_retries = 3))
 kernel32 = ctypes.windll.kernel32
 
-while True :
+for i in itertools.count(1) :
+    print(i)
+
     kernel32.SetConsoleMode(kernel32.GetStdHandle(-10), (0x4|0x80|0x20|0x2|0x10|0x1|0x40|0x100))
 
     bookId = input(f'請輸入ＩＤ：')
@@ -43,7 +45,7 @@ while True :
                     future.index = index
                     futures.append(future)
 
-                for future in as_completed(futures) :
+                for future in concurrent.futures.as_completed(futures) :
                     response = future.result()
                     savImg = open(f'{savePath}\\{future.index + 1}.{imgType}', 'ab')
                     savImg.write(response.content)
