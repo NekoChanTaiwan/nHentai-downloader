@@ -28,12 +28,12 @@ while True :
 
         savePath = f'{os.getcwd()}\\{bookId}'
 
-        print(f'ＩＤ：{bookId}, 圖片類型：{imgType}, 資料庫ＩＤ：{galleriesId}, 頁數：{pages}, 狀態：開始下載')
-
         if os.path.isdir(savePath) :
             shutil.rmtree(savePath)
 
         os.mkdir(savePath)
+
+        print(f'ＩＤ：{bookId}, 圖片類型：{imgType}, 資料庫ＩＤ：{galleriesId}, 頁數：{pages}, 狀態：開始下載')
 
         with FuturesSession(max_workers = 50) as seesion :
                 futures = []
@@ -41,7 +41,6 @@ while True :
                 for index in range(pages) :
                     future = session.get(f'https://i.nhentai.net/galleries/{galleriesId}/{index + 1}.{imgType}', timeout = (5, None))
                     future.index = index
-                    future.time = time.time()
                     futures.append(future)
 
                 for future in as_completed(futures) :
@@ -50,7 +49,7 @@ while True :
                     savImg.write(response.content)
                     savImg.close()
 
-        print(f'ＩＤ：{bookId}, 圖片類型：{imgType}, 資料庫ＩＤ：{galleriesId}, 頁數：{pages}, 狀態：下載完畢, 花費時間：{time.time() - begin} 秒')
+        print(f'ＩＤ：{bookId}, 圖片類型：{imgType}, 資料庫ＩＤ：{galleriesId}, 頁數：{pages}, 狀態：下載完畢, 花費時間：{round(time.time() - begin)} 秒')
 
     else :
         print('請輸入正確的ＩＤ。')
