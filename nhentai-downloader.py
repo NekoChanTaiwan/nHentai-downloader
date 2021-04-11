@@ -39,7 +39,7 @@ while True :
                 futures = []
 
                 for index in range(pages) :
-                    future = session.get(f'https://i.nhentai.net/galleries/{galleriesId}/{index + 1}.{imgType}', timeout = (5, 10))
+                    future = session.get(f'https://i.nhentai.net/galleries/{galleriesId}/{index + 1}.{imgType}', timeout = (5, None))
                     future.index = index
                     future.time = time.time()
                     futures.append(future)
