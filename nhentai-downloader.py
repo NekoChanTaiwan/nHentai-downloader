@@ -3,7 +3,7 @@ import requests
 from requests_futures.sessions import FuturesSession
 from bs4 import BeautifulSoup
 
-os.system('title nHentai Downloader Ver 0.1 By NekoChan')
+os.system('title nHentai Downloader v1.0 By NekoChan')
 
 session = FuturesSession()
 session.mount('https://', requests.adapters.HTTPAdapter(max_retries = 3))
