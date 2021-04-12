@@ -1,5 +1,5 @@
 ### Download compiled version (.exe)
-[Releases](https://github.com/NekoChanTaiwan/nhentai-downloader/releases)
+[Releases](https://github.com/NekoChanTaiwan/nHentai-downloader/releases/latest)
 
 ### Requirements
 ```
